@@ -1,0 +1,28 @@
+﻿@model List<TraineeShowResultVM>
+@{
+    ViewData["Title"] = "ShowTraineeResult";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Degree</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="color:@item.Color">
+                <td>@item.TraineeName</td>
+                <td>@item.CousreName</td>
+                <td>@item.Degree</td>c
+                <td><img src="~/Images/@item.Image" style="width:100px;height:100px" /></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
