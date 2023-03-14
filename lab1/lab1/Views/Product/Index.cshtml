@@ -1,0 +1,27 @@
+﻿<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>price</th>
+            <th>Image</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Product item in Model)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.name</td>
+                <td>@item.description</td>
+                <td>@item.price</td>
+                <td><img src="~/Images/@item.image" style="width:100px;height:100px" /></td>
+                <td><a href="/product/details/@item.id" class="btn btn-primary">Details</a></td>
+            </tr>
+        }
+        
+    </tbody>
+</table>
+<a href=""></a>
