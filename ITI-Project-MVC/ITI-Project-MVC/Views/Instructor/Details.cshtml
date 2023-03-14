@@ -1,0 +1,14 @@
+﻿@model Instructor
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="~/Images/@Model.Image" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Address</p>
+        <a href="/instructor/index" class="btn btn-primary">Back</a>
+    </div>
+</div>
+
