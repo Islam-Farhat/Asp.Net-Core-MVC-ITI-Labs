@@ -3,6 +3,7 @@
     ViewData["Title"] = "Index";
 }
 
+<a href="/Instructor/AddInstructor" class="btn btn-primary">Add Instructor</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -10,8 +11,9 @@
             <th>Name</th>
             <th>Address</th>
             <th>Course</th>
+            <th>Department</th>
             <th>Image</th>
-            <th>Details</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -22,12 +24,13 @@
                     <td>@item.Name</td>
                     <td>@item.Address</td>
                     <td>@item.Course.Name</td>
+                    <td>@item.Department.Name</td>
                     <td><img src="~/Images/@item.Image" style="width:100px;height:100px" /></td>
-                    <td><a href="/Instructor/details/@item.Id" class="btn btn-primary">Details</a></td>
+                <td><a href="/Instructor/details/@item.Id" class="btn btn-info">Details</a> | <a href="/Instructor/EditInstructor/@item.Id" class="btn btn-warning">Edit</a></td>
                 </tr>
         }
 
     </tbody>
 </table>
-<a href=""></a>
+
 

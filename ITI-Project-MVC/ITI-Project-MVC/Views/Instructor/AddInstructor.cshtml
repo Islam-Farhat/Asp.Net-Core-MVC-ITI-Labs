@@ -1,0 +1,41 @@
+﻿@model Instructor
+
+<form method="post" asp-action="AddInstructor" enctype="multipart/form-data">
+   
+    <div class="form-group">
+        <label for="exampleInputPassword1">Name</label>
+        <input type="text" name="Name" class="form-control" id="" value="" placeholder="Enter your Name">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Image</label>
+        <input name="Imagell" type="file" class="form-control" id="" value="" placeholder="Image.....">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Salary</label>
+        <input type="number" name="Salary" class="form-control" id="" value="" placeholder="Enter your Salary">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Address</label>
+        <input type="text" name="Address" class="form-control" id="" value="" placeholder="Enter your Address">
+    </div>
+    <div class="form-group">
+        <label>Department</label>
+        <select name="Dept_ID" id="Dept_ID" class="form-control">
+            @foreach (Department itemDept in ViewBag.deptList)
+            {
+                    <option value="@itemDept.Id">@itemDept.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Course</label>
+        <select name="Course_Id" id="Cousre_ID" class="form-control">
+            @foreach (Course item in ViewBag.courseList)
+            {
+                    <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
