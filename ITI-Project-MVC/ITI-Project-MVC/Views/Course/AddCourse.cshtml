@@ -1,0 +1,40 @@
+﻿@model Course
+
+@{
+    ViewData["Title"] = "AddCourse";
+    SelectList depts = new SelectList(ViewBag.deptList, "Id", "Name");
+    Layout = "_MyLayout";
+}
+
+<form method="post" asp-action="AddCourse" asp-controller="Course">
+
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter your Name">
+    </div>
+    <div class="form-group">
+        <label asp-for="Degree"></label>
+        <input asp-for="Degree" class="form-control" placeholder="Degree.....">
+    </div>
+    <div class="form-group">
+        <label asp-for="MinDegree"></label>
+        <input asp-for="MinDegree"  class="form-control" placeholder="Enter your MinDegree">
+    </div>
+    <div class="form-group">
+        <label asp-for="Department.Name"></label>
+
+        <select class="form-control" asp-for="Dept_Id" asp-items="depts">
+            <option value="">--Select Department--</option>
+        </select>
+
+       @* <select name="Dept_ID" id="Dept_ID" class="form-control">
+            @foreach (Department itemDept in ViewBag.deptList)
+            {
+                <option value="@itemDept.Id">@itemDept.Name</option>
+            }
+        </select>*@
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+<br />

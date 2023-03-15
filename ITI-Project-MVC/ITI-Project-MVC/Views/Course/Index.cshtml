@@ -1,0 +1,36 @@
+﻿@model List<Course>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_MyLayout";
+}
+
+<br />
+<a href="/Course/AddCourse" class="btn btn-primary">Add Course</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Degree</th>
+            <th>MinDegree</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Degree</td>
+                <td>@item.MinDegree</td>
+                <td>@item.Department.Name</td>
+                <td><a href="/Course/EditCourse/@item.Id" class="btn btn-warning">Edit</a> |  <a href="/Course/DeleteCourse/@item.Id" class="btn btn-danger">Delete</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
