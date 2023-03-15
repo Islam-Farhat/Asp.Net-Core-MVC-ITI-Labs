@@ -53,13 +53,6 @@ namespace ITI_Project_MVC.Controllers
             if (newInstructor.Name!=null && Imagell != null&& newInstructor.Address != null)
             {
                 newInstructor.Image = Imagell.FileName;
-                //Instructor instructor = new Instructor();
-                //instructor.Name = newInstructor.Name;
-                //instructor.Image = newInstructor.Image;
-                //instructor.Salary = newInstructor.Salary;
-                //instructor.Address = newInstructor.Address;
-                //instructor.Course_Id = newInstructor.Course_Id;
-                //instructor.Dept_Id = newInstructor.Dept_Id;
                 context.Instructors.Add(newInstructor);
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -114,6 +107,7 @@ namespace ITI_Project_MVC.Controllers
         [HttpPost]
         public IActionResult EditInstructor([FromRoute] int id, Instructor newInstructor,IFormFile Imagell)
         {
+         
             InstructorCourseDepartmentVM resultVM = new InstructorCourseDepartmentVM();
             resultVM.Id = newInstructor.Id;
             resultVM.Name = newInstructor.Name;
@@ -121,7 +115,8 @@ namespace ITI_Project_MVC.Controllers
             resultVM.Address = newInstructor.Address;
             resultVM.Course_Id = newInstructor.Course_Id;
             resultVM.Dept_Id = newInstructor.Dept_Id;
-
+            
+            //upload file
             string filename = string.Empty;
             if (Imagell != null)
             {
@@ -131,9 +126,13 @@ namespace ITI_Project_MVC.Controllers
                 string fullpath = Path.Combine(uploads, filename);
                 Imagell.CopyTo(new FileStream(fullpath, FileMode.Create));
             }
-            if (newInstructor.Name != null&&Imagell!=null&& newInstructor.Address != null)
+            //-------------------------------------------------//
+            if (newInstructor.Name != null&& newInstructor.Address != null)
             {
+                if (Imagell != null)
+                {
                 newInstructor.Image = filename;
+                }
                 context.Instructors.Update(newInstructor);
                 context.SaveChanges();
                 return RedirectToAction("Index");
