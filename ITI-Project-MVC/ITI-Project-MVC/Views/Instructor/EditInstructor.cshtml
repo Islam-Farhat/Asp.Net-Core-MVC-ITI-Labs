@@ -1,0 +1,56 @@
+﻿@model InstructorCourseDepartmentVM
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Name</label>
+        <input type="text" name="Name" class="form-control" id="" value="@Model?.Name" placeholder="Enter your Name">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Image</label>
+        <input type="file" name="Imagell" class="form-control" id="" value="@Model?.Image" placeholder="Image.....">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Salary</label>
+        <input type="number" name="Salary" class="form-control" id="" value="@Model?.Salary" placeholder="Enter your Salary">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Address</label>
+        <input type="text" name="Address""" class="form-control" id="" value="@Model?.Address" placeholder="Enter your Address">
+    </div>
+    <div class="form-group">
+        <label>Department</label>
+        <select name="Dept_Id" id="Dept_ID" class="form-control">
+            @foreach (Department itemDept in Model.Departments)
+            {
+                @if (Model.Dept_Id == itemDept.Id)
+                {
+                    <option value="@itemDept.Id" selected>@itemDept.Name</option>
+                }
+                else
+                {
+                    <option value="@itemDept.Id">@itemDept.Name</option>
+                }
+                
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Course</label>
+        <select name="Course_Id" id="Course_Id" class="form-control">
+            @foreach (Course item in Model.Courses)
+            {
+                @if (Model.Course_Id == item.Id)
+                {
+                    <option value="@item.Id" selected>@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+                
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
