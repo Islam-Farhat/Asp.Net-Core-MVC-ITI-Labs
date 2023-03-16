@@ -11,30 +11,32 @@
     <div class="form-group">
         <label asp-for="Name">Name</label>
         <input asp-for="Name" class="form-control" placeholder="Enter your Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Degree"></label>
         <input asp-for="Degree" class="form-control" placeholder="Degree.....">
+        <span asp-validation-for="Degree" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="MinDegree"></label>
         <input asp-for="MinDegree"  class="form-control" placeholder="Enter your MinDegree">
+        <span asp-validation-for="MinDegree" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Department.Name"></label>
 
         <select class="form-control" asp-for="Dept_Id" asp-items="depts">
-            <option value="">--Select Department--</option>
         </select>
-
-       @* <select name="Dept_ID" id="Dept_ID" class="form-control">
-            @foreach (Department itemDept in ViewBag.deptList)
-            {
-                <option value="@itemDept.Id">@itemDept.Name</option>
-            }
-        </select>*@
     </div>
 
     <button type="submit" class="btn btn-primary">Add</button>
 </form>
 <br />
+@section Scripts{
+    
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

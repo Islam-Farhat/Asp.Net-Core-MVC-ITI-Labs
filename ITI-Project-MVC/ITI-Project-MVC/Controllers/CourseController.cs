@@ -9,6 +9,14 @@ namespace ITI_Project_MVC.Controllers
     public class CourseController : Controller
     {
         ITIContext context = new ITIContext();
+
+        public IActionResult CheckMinDegree(double MinDegree, double Degree)
+        {
+            if (MinDegree <Degree)
+                return Json(true);
+            else
+                return Json(false);
+        }
         public IActionResult Index()
         {
             var result = context.Courses.Include(s => s.Department).ToList();
@@ -25,12 +33,13 @@ namespace ITI_Project_MVC.Controllers
         [HttpPost]
         public IActionResult AddCourse(Course newCourse)
         {
-            if (newCourse.Name != null && newCourse.Degree != null && newCourse.MinDegree != null)
+            if (ModelState.IsValid)
             {
                 context.Courses.Add(newCourse);
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.deptList = context.Departments.ToList();
             return View();
         }
 
@@ -58,6 +67,7 @@ namespace ITI_Project_MVC.Controllers
 
         public IActionResult DeleteCourse(int id)
         {
+
             var result = context.Courses.FirstOrDefault(x => x.Id == id);
 
             context.Courses.Remove(result);
