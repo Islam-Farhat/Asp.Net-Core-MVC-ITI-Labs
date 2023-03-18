@@ -20,22 +20,47 @@
     </div>
     <div class="form-group">
         <label>Department</label>
-        <select name="Dept_ID" id="Dept_ID" class="form-control">
+        <select name="Dept_ID" id="Dept_ID" class="form-control" onchange="GetCousre()">
+            <option value="0">-- Select Department --</option>
             @foreach (Department itemDept in ViewBag.deptList)
             {
-                    <option value="@itemDept.Id">@itemDept.Name</option>
+                <option value="@itemDept.Id">@itemDept.Name</option>
             }
         </select>
     </div>
     <div class="form-group">
         <label>Course</label>
-        <select name="Course_Id" id="Cousre_ID" class="form-control">
+        <select class="form-control" id="courseSelect"></select>
+        @*<select name="Course_Id" id="Cousre_ID" class="form-control">
             @foreach (Course item in ViewBag.courseList)
             {
                     <option value="@item.Id">@item.Name</option>
             }
-        </select>
+        </select>*@
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+@section Scripts{
+    <script src="/lib/jquery/dist/jquery.min.js">
+    </script>
+    <script>
+        function GetCousre() {
+            var deptID = $("#Dept_ID").val();
+            alert(deptID)
+            $("#courseSelect").html("");
+            $.ajax({
+                url: "/Instructor/GetCoursesByDeptID",
+
+                data: { "deptID": deptID },
+                success: function (result) {
+                    //Json
+                    console.log(result);
+                    for (let item of result) {
+                        $("#courseSelect").append("<option value=" + item.id + ">" + item.name + "</option>")
+                    }
+                }
+            });
+        }
+    </script>
+}

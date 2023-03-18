@@ -26,6 +26,13 @@ namespace ITI_Project_MVC.Controllers
             return View(result);
         }
 
+        public IActionResult GetCoursesByDeptID(int deptID)
+        {
+            List<Course> course = context.Courses.Where(e => e.Dept_Id == deptID).ToList();
+            return Json(course);
+        }
+
+
         [HttpGet]
         public IActionResult AddInstructor()
         {
@@ -38,7 +45,7 @@ namespace ITI_Project_MVC.Controllers
         public IActionResult AddInstructor(Instructor newInstructor, IFormFile Imagell)
         {
             ViewBag.deptList = context.Departments.ToList();
-            ViewBag.courseList = context.Courses.ToList();
+           // ViewBag.courseList = context.Courses.ToList();
 
             //Upload File
             string filename = string.Empty;

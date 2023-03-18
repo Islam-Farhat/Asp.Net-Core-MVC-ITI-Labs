@@ -52,6 +52,7 @@ namespace ITI_Project_MVC.Controllers
 
             return View(result);
         }
+
         [HttpPost]
         public IActionResult EditCourse([FromRoute] int id, Course newCourse)
         {

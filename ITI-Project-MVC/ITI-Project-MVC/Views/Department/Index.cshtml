@@ -1,0 +1,92 @@
+﻿@model List<Department>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            
+            <th>Name</th>
+            <th>Manager</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Manager</td>
+                <td> <button type="button" onclick="GetDepartmentData(@item.Id)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="Name"  class="col-form-label">Name:</label>
+                    <input type="text" id="txtName" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="Name" class="col-form-label">Manager:</label>
+                    <input type="text" id="txtManager" class="form-control">
+                </div>
+                <input type="hidden" id="txtId" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button onclick="EditDepartment()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="/lib/jquery/dist/jquery.min.js">
+    </script>
+    <script>
+        function GetDepartmentData(deptID) {
+            alert(deptID)
+            $.ajax({
+                url: "/Department/GetDepartmentByID",
+                data: { "deptID": deptID },
+                success: function (result) {
+                    $("#txtName").val(result.name);
+                    $("#txtManager").val(result.manager);
+                    $("#txtId").val(deptID);
+                }
+            });
+        }
+        function EditDepartment() {
+            var deptID=$("#txtId").val();
+            var Name=$("#txtName").val();
+            var Manager= $("#txtManager").val();
+
+            alert(deptID)
+            alert(Name)
+            alert(Manager)
+            $.ajax({
+                url: "/Department/Edit",
+                data: { "Id": deptID ,"Name": Name ,"Manager": Manager },
+                success: function (result) {
+                    alert("Success");
+                }
+            });
+        }
+    </script>
+}
+

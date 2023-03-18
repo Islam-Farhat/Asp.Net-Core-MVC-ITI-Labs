@@ -11,11 +11,13 @@ namespace ITI_Project_MVC.Models
 
         [MinLength(3, ErrorMessage = "Name must be more than 2 Char")]
         [MaxLength(25, ErrorMessage = "Name must be less than 25 letter")]
-        [UniqueCourseName(ErrorMessage = "Course Name Already Found")]
+        [UniqueCourseName(ErrorMessage = "Course Name Already Found")]//Custom Validation Attribute
         public string Name { get; set; }
+
         [Range(minimum: 50, maximum: 100)]
         public double Degree { get; set; }
 
+        [Range(minimum: 0, maximum: 100)]
         [Remote("CheckMinDegree", "Course", AdditionalFields = "Degree", ErrorMessage = "MinDegree must less than Degree")]//Client side using Ajax 
         public double MinDegree { get; set; }
 
