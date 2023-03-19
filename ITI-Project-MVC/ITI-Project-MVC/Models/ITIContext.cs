@@ -4,6 +4,14 @@ namespace ITI_Project_MVC.Models
 {
     public class ITIContext:DbContext
     {
+        public ITIContext() : base()
+        {
+
+        }
+        public ITIContext(DbContextOptions options) : base(options)//inject
+        {
+
+        }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Course_Result> Course_Results { get; set; }
         public DbSet<Department> Departments { get; set; }

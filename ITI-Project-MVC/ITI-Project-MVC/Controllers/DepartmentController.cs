@@ -1,32 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ITI_Project_MVC.Models;
+using ITI_Project_MVC.Repository;
 
 namespace ITI_Project_MVC.Controllers
 {
     public class DepartmentController : Controller
     {
-        ITIContext context = new ITIContext();
+        IDepartmentRepository DepartmentRepository;
+        public DepartmentController(IDepartmentRepository departmentRepository)
+        {
+            DepartmentRepository = departmentRepository;
+        }
         public IActionResult Index()
         {
-            var result = context.Departments.ToList();
+            var result = DepartmentRepository.GetAll();
             return View(result);
         }
         public IActionResult AddDepartment(Department dept)
         {
-            context.Departments.Add(dept);
-            context.SaveChanges();
+            DepartmentRepository.Insert(dept);
             return View();
         }
         public IActionResult GetDepartmentByID(int deptID)
         {
-            var result = context.Departments.FirstOrDefault(x=>x.Id==deptID);
+            var result = DepartmentRepository.GetByID(deptID);
             return Json(result);
         }
-
         public IActionResult Edit(Department dept)
         {
-            context.Departments.Update(dept);
-            context.SaveChanges();
+            DepartmentRepository.Update(dept);
             return RedirectToAction("Index");
         }
     }

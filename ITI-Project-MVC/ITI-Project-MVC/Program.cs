@@ -1,3 +1,7 @@
+using ITI_Project_MVC.Models;
+using ITI_Project_MVC.Repository;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +11,14 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+
+builder.Services.AddDbContext<ITIContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("connectionstring"))
+            );
+
+//Inject Object
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
 var app = builder.Build();
 
